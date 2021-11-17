@@ -14,8 +14,6 @@ panel.
 > - SideMenu: Menu with option buttons on the _west_ side.
 > - InputField _(WIP)_: A _terminal-like_ panel.
 
-![login.png](src/cesarjzo/gui/images/login.png)
-
 ### How to use them:
 
 1. Instantiate any panel and put it into a container, such as:
