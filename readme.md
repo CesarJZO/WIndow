@@ -14,7 +14,7 @@ panel.
 > - SideMenu: Menu with option buttons on the _west_ side.
 > - InputField _(WIP)_: A _terminal-like_ panel.
 
-![login.png](../../Programming%20stuff/Java/Window/src/cesarjzo/gui/images/login.png)
+![login.png](src/cesarjzo/gui/images/login.png)
 
 ### How to use them:
 
