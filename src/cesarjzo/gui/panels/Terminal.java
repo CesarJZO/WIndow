@@ -1,5 +1,7 @@
 package cesarjzo.gui.panels;
+import cesarjzo.gui.Theme;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
@@ -10,21 +12,27 @@ import java.awt.event.ActionEvent;
 public class Terminal extends JPanel {
     private int rows = 15;
     private int columns = 30;
+    private Font font;
+    private Color bgColor;
+    private Color fontColor;
     private final JTextArea txtArea;
-    private final JTextField txtFld;
     private final JScrollPane scrollPane;
+    private final JTextField txtFld;
     private final JPanel inputPanel;
     private final JButton button;
     private String text;
 
     /**
      * Creates a terminal-like panel with a text area (uneditable) and a text field with a button.
-     * @param btnLabel
+     * @param btnLabel Text to be displayed on the button
      */
     public Terminal(String btnLabel) {
+        font = new Font("Consolas", Font.PLAIN, 12);
+
         txtArea = new JTextArea(rows, columns);
         txtArea.setLineWrap(true);
         txtArea.setEditable(false);
+        txtArea.setFont(font);
         scrollPane = new JScrollPane(
                 txtArea,
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -32,12 +40,8 @@ public class Terminal extends JPanel {
         text = "";
 
         txtFld = new JTextField(columns);
-        txtFld.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                writeInput();
-            }
-        });
+        txtFld.setFont(font);
+        txtFld.addActionListener(e -> writeInput());
         button = new JButton(btnLabel);
         inputPanel = new JPanel();
         inputPanel.add(txtFld);
@@ -78,5 +82,23 @@ public class Terminal extends JPanel {
             txtArea.setText(text);
             txtFld.setText("");
         }
+    }
+
+    public void setTheme(Theme theme) {
+        switch (theme) {
+            case dark -> {
+                bgColor = Color.DARK_GRAY;
+                fontColor = Color.WHITE;
+
+            }
+            case light -> {
+                bgColor = new Color(0xdedede);
+                fontColor = new Color(0x0a0a0a);
+            }
+        }
+        txtArea.setBackground(bgColor);
+        txtArea.setForeground(fontColor);
+        txtFld.setBackground(bgColor);
+        txtFld.setForeground(fontColor);
     }
 }

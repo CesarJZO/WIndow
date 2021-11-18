@@ -1,3 +1,4 @@
+import cesarjzo.gui.Theme;
 import cesarjzo.gui.Window;
 import cesarjzo.gui.panels.Form;
 import cesarjzo.gui.panels.Terminal;
@@ -22,10 +23,12 @@ public class Implementation {
         // Create some panels and forms
         SideMenu menu = new SideMenu("Login", "Insert", "Terminal");
         Login loginPanel = new Login();
-        Form form = new Form("Send", "Name", "Number", "Address", "eMail");
+        Form form = new Form("Send", "Name", "Number", "Address", "eMail", "City", "Age");
         Terminal terminal = new Terminal("Send");
 
-        // Add all of them to central panel and makes one of them visible by default
+        terminal.setTheme(Theme.light);
+
+        // Add all of them to central panel and make one of them visible by default
         menu.addToCentralPanel(loginPanel);
         menu.addToCentralPanel(form);
         menu.addToCentralPanel(terminal);
