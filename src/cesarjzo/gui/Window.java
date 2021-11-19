@@ -1,7 +1,5 @@
 package cesarjzo.gui;
 
-import cesarjzo.gui.panels.SideMenu;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,10 +9,14 @@ import java.awt.*;
  * @author CésarJZO
  */
 public class Window extends JFrame {
-    private SideMenu sideMenu;
     private final Dimension dimension;
     private JPanel mainPanel;
     private final ImageIcon icon;
+
+    public void setStyle(Style style) {
+        setBackground(style.backgroundColor);
+        mainPanel.setBackground(style.backgroundColor);
+    }
 
     /**
      * Creates an empty visible window with a default title.
@@ -95,14 +97,6 @@ public class Window extends JFrame {
     public void setMainPanel(JPanel mainPanel) {
         this.mainPanel = mainPanel;
         setContentPane(mainPanel);
-    }
-
-    public SideMenu getSideMenu() {
-        return sideMenu;
-    }
-
-    public void setSideMenu(SideMenu sideMenu) {
-        this.sideMenu = sideMenu;
     }
 
     /**

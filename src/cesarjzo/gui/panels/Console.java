@@ -1,20 +1,17 @@
 package cesarjzo.gui.panels;
-import cesarjzo.gui.Theme;
+import cesarjzo.gui.Style;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 /**
  * Creates a terminal-like panel. Contains a text area with a scroll bar for the output and a text
  * field for the input.
  * @author CésarJZO
  */
-public class Terminal extends JPanel {
+public class Console extends JPanel {
     private int rows = 15;
     private int columns = 30;
-    private Font font;
-    private Color bgColor;
-    private Color fontColor;
     private final JTextArea txtArea;
     private final JScrollPane scrollPane;
     private final JTextField txtFld;
@@ -26,22 +23,18 @@ public class Terminal extends JPanel {
      * Creates a terminal-like panel with a text area (uneditable) and a text field with a button.
      * @param btnLabel Text to be displayed on the button
      */
-    public Terminal(String btnLabel) {
-        font = new Font("Consolas", Font.PLAIN, 12);
-
+    public Console(String btnLabel) {
         txtArea = new JTextArea(rows, columns);
         txtArea.setLineWrap(true);
         txtArea.setEditable(false);
-        txtArea.setFont(font);
         scrollPane = new JScrollPane(
                 txtArea,
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        txtArea.setFont(new Font("Consolas", Font.PLAIN, 18));
         text = "";
 
         txtFld = new JTextField(columns);
-        txtFld.setFont(font);
-        txtFld.addActionListener(e -> writeInput());
         button = new JButton(btnLabel);
         inputPanel = new JPanel();
         inputPanel.add(txtFld);
@@ -84,21 +77,22 @@ public class Terminal extends JPanel {
         }
     }
 
-    public void setTheme(Theme theme) {
-        switch (theme) {
-            case dark -> {
-                bgColor = Color.DARK_GRAY;
-                fontColor = Color.WHITE;
+    public void setStyle(Style style) {
+        setBackground(style.backgroundColor);
 
-            }
-            case light -> {
-                bgColor = new Color(0xdedede);
-                fontColor = new Color(0x0a0a0a);
-            }
-        }
-        txtArea.setBackground(bgColor);
-        txtArea.setForeground(fontColor);
-        txtFld.setBackground(bgColor);
-        txtFld.setForeground(fontColor);
+        txtArea.setBackground(style.textBGColor);
+        txtArea.setForeground(style.foreground);
+        txtArea.setBorder(null);
+        scrollPane.setBorder(null);
+
+        inputPanel.setBackground(style.backgroundColor);
+        txtFld.setBackground(style.textBGColor);
+        txtFld.setForeground(style.foreground);
+        txtFld.setFont(style.font);
+        txtFld.setBorder(null);
+
+        button.setBackground(style.buttonColor);
+        button.setForeground(style.foreground);
+        button.setFont(style.font);
     }
 }

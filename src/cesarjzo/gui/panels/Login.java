@@ -1,5 +1,7 @@
 package cesarjzo.gui.panels;
 
+import cesarjzo.gui.Style;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -87,5 +89,30 @@ public class Login extends JPanel {
      */
     public String toString() {
         return "Username: " + userField.getText() + "\nPassword: " + passwordField.getText();
+    }
+
+    public void setStyle(Style style) {
+        setBackground(style.backgroundColor);
+        userPanel.setBackground(style.backgroundColor);
+        passwordPanel.setBackground(style.backgroundColor);
+        buttonPanel.setBackground(style.backgroundColor);
+
+        userLabel.setForeground(style.foreground);
+        userLabel.setFont(style.font);
+        passwordLabel.setForeground(style.foreground);
+        passwordLabel.setFont(style.font);
+
+        userField.setBackground(style.textBGColor);
+        userField.setForeground(style.foreground);
+        userField.setFont(style.font);
+//        userField.setBorder(null);
+        passwordField.setBackground(style.textBGColor);
+        passwordField.setForeground(style.foreground);
+        passwordField.setFont(style.font);
+//        passwordField.setBorder(null);
+
+        sendButton.setForeground(style.foreground);
+        sendButton.setBackground(style.buttonColor);
+        sendButton.setFont(style.font);
     }
 }

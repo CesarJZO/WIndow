@@ -1,5 +1,7 @@
 package cesarjzo.gui.panels;
 
+import cesarjzo.gui.Style;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,6 +18,25 @@ public class Form extends JPanel {
     private final int COLUMNS = 15;
     private final JButton button;
 
+    public void setStyle(Style style) {
+        setBackground(style.backgroundColor);
+        for (int i = 0; i < amount; i++) {
+            panels[i].setBackground(style.backgroundColor);
+
+            labels[i].setForeground(style.foreground);
+            labels[i].setFont(style.font);
+
+            txtFields[i].setBackground(style.textBGColor);
+            txtFields[i].setForeground(style.foreground);
+            txtFields[i].setFont(style.font);
+
+            button.setForeground(style.foreground);
+            button.setBackground(style.buttonColor);
+            button.setFont(style.font);
+        }
+        if (amount > 1)
+            panels[amount].setBackground(style.backgroundColor);
+    }
     /**
      * Creates a single text field form.
      *
@@ -23,7 +44,7 @@ public class Form extends JPanel {
      * @param label  Text of the text field.
      */
     public Form(String btnTab, String label) {
-        amount = 1;
+        amount = 2;
         final int i = 0;
         labels = new JLabel[amount];
         labels[i] = new JLabel(label);

@@ -1,5 +1,7 @@
 package cesarjzo.gui.panels;
 
+import cesarjzo.gui.Style;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,8 +16,19 @@ import java.util.Map;
 public class SideMenu extends JPanel {
     private final Map<Character, JButton> btnMap;
     private final ArrayList<JPanel> panels;
+    private final JPanel west;
     private final JPanel center;
 
+    public void setStyle(Style style) {
+        setBackground(style.backgroundColor);
+        west.setBackground(style.panelColor);
+        center.setBackground(style.backgroundColor);
+        for (JButton button : btnMap.values()) {
+            button.setBackground(style.panelColor);
+            button.setForeground(style.foreground);
+            button.setFont(style.font);
+        }
+    }
     /**
      * Creates a menu located on the left side of the window.
      *
@@ -24,7 +37,7 @@ public class SideMenu extends JPanel {
     public SideMenu(String... btnTags) {
         super(new BorderLayout());
 
-        JPanel west = new JPanel();
+        west = new JPanel();
         west.setLayout(new GridLayout(btnTags.length, 1));
         center = new JPanel();
         panels = new ArrayList<>();
@@ -50,10 +63,6 @@ public class SideMenu extends JPanel {
         return center;
     }
 
-    /**
-     * @param key
-     * @return
-     */
     public JButton getButton(char key) {
         return btnMap.get(key);
     }
@@ -73,7 +82,7 @@ public class SideMenu extends JPanel {
      *
      * @param panel panel to be displayed
      */
-    public void setVisibleOnly(JPanel panel) {
+    public void setDefaultPanel(JPanel panel) {
         for (JPanel p : panels)
             p.setVisible(p.equals(panel));
     }
