@@ -14,21 +14,13 @@ import java.util.Map;
  * @author CésarJZO
  */
 public class SideMenu extends JPanel {
-    private final Map<Character, JButton> btnMap;
+    private final Map<String, JButton> btnMap;
     private final ArrayList<JPanel> panels;
     private final JPanel west;
     private final JPanel center;
+    private final JPanel south;
+    private final JPanel east;
 
-    public void setStyle(Style style) {
-        setBackground(style.backgroundColor);
-        west.setBackground(style.panelColor);
-        center.setBackground(style.backgroundColor);
-        for (JButton button : btnMap.values()) {
-            button.setBackground(style.panelColor);
-            button.setForeground(style.foreground);
-            button.setFont(style.font);
-        }
-    }
     /**
      * Creates a menu located on the left side of the window.
      *
@@ -42,18 +34,21 @@ public class SideMenu extends JPanel {
         center = new JPanel();
         panels = new ArrayList<>();
 
+        south = new JPanel();
+        east = new JPanel();
+
         btnMap = new HashMap<>();
         for (String tag : btnTags) {
-            char key = Character.toLowerCase(tag.charAt(0));
             JButton btn = new JButton(tag);
-            btnMap.put(key, btn);
+            btnMap.put(tag, btn);
             west.add(btn);
         }
 
         add(west, BorderLayout.WEST);
         add(center, BorderLayout.CENTER);
+        add(south, BorderLayout.SOUTH);
+        add(east, BorderLayout.EAST);
     }
-
     /**
      * Gets the central panel
      *
@@ -63,7 +58,7 @@ public class SideMenu extends JPanel {
         return center;
     }
 
-    public JButton getButton(char key) {
+    public JButton getButton(String key) {
         return btnMap.get(key);
     }
 
@@ -72,9 +67,13 @@ public class SideMenu extends JPanel {
      *
      * @param panel panel to be added
      */
-    public void addToCentralPanel(JPanel panel) {
+    public void addToCentral(JPanel panel) {
         panels.add(panel);
         center.add(panel);
+    }
+    
+    public void addToEast(JPanel panel) {
+        east.add(panel);
     }
 
     /**
@@ -85,5 +84,17 @@ public class SideMenu extends JPanel {
     public void setDefaultPanel(JPanel panel) {
         for (JPanel p : panels)
             p.setVisible(p.equals(panel));
+    }
+
+    public void setStyle(Style style) {
+        setBackground(style.backgroundColor);
+        west.setBackground(style.panelColor);
+        center.setBackground(style.backgroundColor);
+        south.setBackground(style.backgroundColor);
+        for (JButton button : btnMap.values()) {
+            button.setBackground(style.panelColor);
+            button.setForeground(style.foreground);
+            button.setFont(style.font);
+        }
     }
 }

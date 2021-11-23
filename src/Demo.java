@@ -21,33 +21,35 @@ public class Demo {
     static void implementUI() {
         // Instantiate the Window and a style
         Window window = new Window("Window");
-        Style style = new Style(Theme.light, AccentColor.lime, "Roboto");
+        Style style = new Style(Theme.dark, AccentColor.blue, "Roboto");
 
         // Create some panels and forms
-        SideMenu menu = new SideMenu("Login", "Insert", "Terminal");
+        SideMenu menu = new SideMenu("Autos", "Rentas", "Estados", "EdtadosAuto", "Marcas", "Modelos");
         Login login = new Login();
-        Form form = new Form("Send", "Name", "Number", "Address", "eMail", "City");
+        Form form = new Form("Send", "ID Sucursal", "ID Estado", "ID Ciudad", "Nombre", "ID Colonia", "Calle");
         Console console = new Console("Send");
 
         // Sets a style for each created panel
-        window.setStyle(style);
-        menu.setStyle(style);
-        login.setStyle(style);
-        form.setStyle(style);
-        console.setStyle(style);
+//        window.setStyle(style);
+//        menu.setStyle(style);
+//        login.setStyle(style);
+//        form.setStyle(style);
+//        console.setStyle(style);
 
         // Add all of them to central panel and make one of them visible by default
-        menu.addToCentralPanel(login);
-        menu.addToCentralPanel(form);
-        menu.addToCentralPanel(console);
+        menu.addToCentral(login);
+        menu.addToCentral(form);
+        menu.addToCentral(console);
         menu.setDefaultPanel(console);
 
+//        menu.addToEast();
+
         // Add some action listeners to make menu work
-        menu.getButton('l')
+        menu.getButton("Autos")
                 .addActionListener(e -> menu.setDefaultPanel(login));
-        menu.getButton('i')
+        menu.getButton("Rentas")
                 .addActionListener(e -> menu.setDefaultPanel(form));
-        menu.getButton('t')
+        menu.getButton("Estados")
                 .addActionListener(e -> menu.setDefaultPanel(console));
 
         // Makes these panels functional

@@ -18,32 +18,13 @@ public class Form extends JPanel {
     private final int COLUMNS = 15;
     private final JButton button;
 
-    public void setStyle(Style style) {
-        setBackground(style.backgroundColor);
-        for (int i = 0; i < amount; i++) {
-            panels[i].setBackground(style.backgroundColor);
-
-            labels[i].setForeground(style.foreground);
-            labels[i].setFont(style.font);
-
-            txtFields[i].setBackground(style.textBGColor);
-            txtFields[i].setForeground(style.foreground);
-            txtFields[i].setFont(style.font);
-
-            button.setForeground(style.foreground);
-            button.setBackground(style.buttonColor);
-            button.setFont(style.font);
-        }
-        if (amount > 1)
-            panels[amount].setBackground(style.backgroundColor);
-    }
     /**
      * Creates a single text field form.
      *
-     * @param btnTab Text to be displayed on the button.
-     * @param label  Text of the text field.
+     * @param btnTag Text to be displayed on the button.
+     * @param label Text of the text field.
      */
-    public Form(String btnTab, String label) {
+    public Form(String btnTag, String label) {
         amount = 2;
         final int i = 0;
         labels = new JLabel[amount];
@@ -58,32 +39,31 @@ public class Form extends JPanel {
         panels[i].add(txtFields[i]);
 
         add(panels[i]);
-        button = new JButton(btnTab);
+        button = new JButton(btnTag);
     }
-
     /**
      * Creates a form depending on how many labels you put.
      *
-     * @param btnTab Text to be displayed on the button.
-     * @param tabs   Texts to be displayed on the labels.
+     * @param btnTag Text to be displayed on the button.
+     * @param labels Texts to be displayed on the labels.
      */
-    public Form(String btnTab, String... tabs) {
+    public Form(String btnTag, String... labels) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        amount = tabs.length;
+        amount = labels.length;
         panels = new JPanel[amount + 1];
-        labels = new JLabel[amount];
+        this.labels = new JLabel[amount];
         txtFields = new JTextField[amount];
         for (int i = 0; i < amount; i++) {
             panels[i] = new JPanel();
             panels[i].setLayout(new BoxLayout(panels[i], BoxLayout.Y_AXIS));
-            labels[i] = new JLabel(tabs[i]);
+            this.labels[i] = new JLabel(labels[i]);
             txtFields[i] = new JTextField(COLUMNS);
-            panels[i].add(labels[i]);
+            panels[i].add(this.labels[i]);
             panels[i].add(txtFields[i]);
             add(panels[i]);
         }
         panels[amount] = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        button = new JButton(btnTab);
+        button = new JButton(btnTag);
         panels[amount].add(button);
         add(panels[amount]);
     }
@@ -139,5 +119,25 @@ public class Form extends JPanel {
             if (i < txtFields.length - 1) sb.append('\n');
         }
         return sb.toString();
+    }
+
+    public void setStyle(Style style) {
+        setBackground(style.backgroundColor);
+        for (int i = 0; i < amount; i++) {
+            panels[i].setBackground(style.backgroundColor);
+
+            labels[i].setForeground(style.foreground);
+            labels[i].setFont(style.font);
+
+            txtFields[i].setBackground(style.textBGColor);
+            txtFields[i].setForeground(style.foreground);
+            txtFields[i].setFont(style.font);
+
+            button.setForeground(style.foreground);
+            button.setBackground(style.buttonColor);
+            button.setFont(style.font);
+        }
+        if (amount > 1)
+            panels[amount].setBackground(style.backgroundColor);
     }
 }
