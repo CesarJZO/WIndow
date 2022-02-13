@@ -9,9 +9,9 @@ import java.awt.*;
  * @author CésarJZO
  */
 public class Paragraph extends JPanel {
-    private String head;
-    private String body;
-    private JTextArea textArea;
+    private final String head;
+    private final String body;
+    private final JLabel textArea;
 
     /**
      * Constructor method that creates the text area
@@ -20,18 +20,32 @@ public class Paragraph extends JPanel {
      * @param body The text body
      */
     public Paragraph(String head, String body) {
-        super();
-        textArea = new JTextArea();
+        this.head = head;
+        this.body = body;
+        textArea = new JLabel();
         JScrollPane scrollPane = new JScrollPane(
                 textArea,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED
         );
-        textArea.setEditable(false);
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
 
-        textArea.setText(this.head + '\n' + this.body);
+        textArea.setText(
+                "<html>\n" +
+                        "\t<body>\n" +
+                        "\t<h1>" + head + "</h1>\n" +
+                        "\t<p>" + body + "</p>\n" +
+                        "\t</body>\n" +
+                        "</html>"
+
+        );
         add(scrollPane, BorderLayout.CENTER);
+    }
+
+    public String getHead() {
+        return head;
+    }
+
+    public String getBody() {
+        return body;
     }
 }

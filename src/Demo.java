@@ -1,7 +1,4 @@
-import cesarjzo.gui.AccentColor;
-import cesarjzo.gui.Style;
-import cesarjzo.gui.Theme;
-import cesarjzo.gui.Window;
+import cesarjzo.gui.*;
 import cesarjzo.gui.panels.Form;
 import cesarjzo.gui.panels.Console;
 import cesarjzo.gui.panels.Login;
@@ -23,11 +20,21 @@ public class Demo {
         Window window = new Window("Window");
         Style style = new Style(Theme.dark, AccentColor.blue, "Roboto");
 
+        String[] menuButtons = {"Login", "Form", "Console", "Paragraph"};
         // Create some panels and forms
-        SideMenu menu = new SideMenu("Autos", "Rentas", "Estados", "EdtadosAuto", "Marcas", "Modelos");
+        SideMenu menu = new SideMenu(menuButtons);
         Login login = new Login();
         Form form = new Form("Send", "ID Sucursal", "ID Estado", "ID Ciudad", "Nombre", "ID Colonia", "Calle");
         Console console = new Console("Send");
+        Paragraph paragraph = new Paragraph("Great Western Railway War Memorial",
+                """
+                The Great Western Railway War Memorial is a First World War memorial by Charles Sargeant Jagger and\n
+                Thomas S. Tait. It stands on platform 1 at London Paddington station, commemorating the 2,500 Great\n
+                Western Railway (GWR) employees killed in the conflict. A third of the GWR's workforce of almost 80,000\n
+                left to fight in the war, the company guaranteeing their jobs. The memorial consists of a bronze statue\n
+                of a soldier in heavy winter clothing, reading a letter from home. The statue stands on a polished\n
+                granite plinth, within a white stone surround.
+                """);
 
         // Sets a style for each created panel
 //        window.setStyle(style);
@@ -40,17 +47,20 @@ public class Demo {
         menu.addToCentral(login);
         menu.addToCentral(form);
         menu.addToCentral(console);
-        menu.setDefaultPanel(console);
+        menu.addToCentral(paragraph);
+        menu.setDefaultPanel(paragraph);
 
 //        menu.addToEast();
 
         // Add some action listeners to make menu work
-        menu.getButton("Autos")
+        menu.getButton(menuButtons[0])
                 .addActionListener(e -> menu.setDefaultPanel(login));
-        menu.getButton("Rentas")
+        menu.getButton(menuButtons[1])
                 .addActionListener(e -> menu.setDefaultPanel(form));
-        menu.getButton("Estados")
+        menu.getButton(menuButtons[2])
                 .addActionListener(e -> menu.setDefaultPanel(console));
+        menu.getButton(menuButtons[3])
+                .addActionListener(e -> menu.setDefaultPanel(paragraph));
 
         // Makes these panels functional
         login.getButton()
